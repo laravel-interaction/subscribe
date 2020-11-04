@@ -1,0 +1,64 @@
+{
+    "name": "zing/laravel-subscribe",
+    "description": "User subscribe/unsubscribe behaviour for Laravel.",
+    "keywords": ["laravel", "subscribe"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zingimmick",
+            "email": "zingimmick@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    },
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "illuminate/database": "^6.0 || ^7.0 || ^8.0",
+        "illuminate/support": "^6.0 || ^7.0 || ^8.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "~1.3.3 || ^1.4.2",
+        "orchestra/testbench": "^4.0 || ^5.0 || ^6.0",
+        "phpunit/phpunit": "^7.5.15 || ^8.4 || ^9.3.3",
+        "zing/coding-standard": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zing\\LaravelSubscribe\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zing\\LaravelSubscribe\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zing\\LaravelSubscribe\\SubscribeServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "lint:rector": "@fix:rector --dry-run",
+        "lint:ecs": "ecs check --ansi",
+        "fix:rector": "rector process --ansi",
+        "fix:ecs": "@lint:ecs --fix",
+        "test:phpunit": "phpunit --colors=always",
+        "lint": [
+            "@lint:rector",
+            "@lint:ecs"
+        ],
+        "fix": [
+            "@fix:rector",
+            "@fix:ecs"
+        ],
+        "test": [
+            "@test:phpunit"
+        ]
+    }
+}
