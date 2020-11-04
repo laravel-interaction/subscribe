@@ -14,7 +14,6 @@ class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
-
     }
 
     protected function getEnvironmentSetUp($app): void

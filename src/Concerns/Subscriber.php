@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Zing\LaravelSubscribe\Concerns;
 
@@ -16,8 +17,8 @@ trait Subscriber
      */
     public function subscribe(Model $object): void
     {
-        /* @var Model|Subscribable $object*/
-        if (!$this->hasSubscribed($object)) {
+        /** @var \Illuminate\Database\Eloquent\Model|\Zing\LaravelSubscribe\Concerns\Subscribable $object */
+        if (! $this->hasSubscribed($object)) {
             $subscribe = app(config('subscribe.models.subscription'));
             $subscribe->{config('subscribe.column_names.user_foreign_key')} = $this->getKey();
 
@@ -32,7 +33,7 @@ trait Subscriber
      */
     public function unsubscribe(Model $object): void
     {
-        /* @var Model|Subscribable $object*/
+        /** @var \Illuminate\Database\Eloquent\Model|\Zing\LaravelSubscribe\Concerns\Subscribable $object */
         $relation = $object->subscriptions()
             ->where('subscribable_id', $object->getKey())
             ->where('subscribable_type', $object->getMorphClass())
@@ -62,9 +63,9 @@ trait Subscriber
     public function hasSubscribed(Model $object): bool
     {
         return tap($this->relationLoaded('subscriptions') ? $this->subscriptions : $this->subscriptions())
-                ->where('subscribable_id', $object->getKey())
-                ->where('subscribable_type', $object->getMorphClass())
-                ->count() > 0;
+            ->where('subscribable_id', $object->getKey())
+            ->where('subscribable_type', $object->getMorphClass())
+            ->count() > 0;
     }
 
     /**

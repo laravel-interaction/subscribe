@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Zing\LaravelSubscribe;
-
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -47,7 +47,7 @@ class Subscription extends Model
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string                                $type
+     * @param string $type
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

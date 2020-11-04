@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Zing\LaravelSubscribe\Concerns;
-
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -28,7 +28,7 @@ trait Subscribable
             }
 
             return tap($this->relationLoaded('subscriptions') ? $this->subscriptions : $this->subscriptions())
-                    ->where(config('subscribe.column_names.user_foreign_key'), $user->getKey())->count() > 0;
+                ->where(config('subscribe.column_names.user_foreign_key'), $user->getKey())->count() > 0;
         }
 
         return false;
