@@ -11,9 +11,12 @@ class SubscribeServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                $this->getConfigPath() => config_path('subscribe.php'),
-            ], 'config');
+            $this->publishes(
+                [
+                    $this->getConfigPath() => config_path('subscribe.php'),
+                ],
+                'config'
+            );
             $this->loadMigrationsFrom(__DIR__ . '/../migrations');
         }
     }
