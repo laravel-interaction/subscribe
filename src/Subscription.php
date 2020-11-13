@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property \Illuminate\Database\Eloquent\Model $user
  * @property \Illuminate\Database\Eloquent\Model $subscriber
  * @property \Illuminate\Database\Eloquent\Model $subscribable
+ *
+ * @method static \Zing\LaravelSubscribe\Subscription|\Illuminate\Database\Eloquent\Builder withType(string $type)
+ * @method static \Zing\LaravelSubscribe\Subscription|\Illuminate\Database\Eloquent\Builder query()
  */
 class Subscription extends Model
 {

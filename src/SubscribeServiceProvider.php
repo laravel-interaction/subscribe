@@ -28,6 +28,6 @@ class SubscribeServiceProvider extends ServiceProvider
 
     protected function getConfigPath(): string
     {
-        return __DIR__ . '/config/subscribe.php';
+        return __DIR__ . '/../config/subscribe.php';
     }
 }

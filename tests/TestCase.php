@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Zing\LaravelSubscribe\Tests;
 
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Zing\LaravelSubscribe\SubscribeServiceProvider;
+use Zing\LaravelSubscribe\Tests\Models\User;
 
 class TestCase extends BaseTestCase
 {
@@ -14,6 +17,20 @@ class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
+        Schema::create(
+            'users',
+            function (Blueprint $table): void {
+                $table->bigIncrements('id');
+                $table->timestamps();
+            }
+        );
+        Schema::create(
+            'channels',
+            function (Blueprint $table): void {
+                $table->bigIncrements('id');
+                $table->timestamps();
+            }
+        );
     }
 
     protected function getEnvironmentSetUp($app): void
@@ -21,11 +38,12 @@ class TestCase extends BaseTestCase
         config(
             [
                 'database.default' => 'testing',
+                'subscribe.models.user' => User::class,
             ]
         );
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             SubscribeServiceProvider::class,
