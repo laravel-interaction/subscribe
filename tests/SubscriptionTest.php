@@ -10,13 +10,29 @@ use Zing\LaravelSubscribe\Tests\Models\User;
 
 class SubscriptionTest extends TestCase
 {
+    /**
+     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\Zing\LaravelSubscribe\Tests\Models\User
+     */
+    protected $user;
+
+    /**
+     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\Zing\LaravelSubscribe\Tests\Models\Channel
+     */
+    protected $channel;
+
+    /**
+     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|\Zing\LaravelSubscribe\Subscription|null
+     */
+    protected $subscription;
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        $user = User::query()->create();
-        $channel = Channel::query()->create();
-        $user->subscribe($channel);
+        $this->user = User::query()->create();
+        $this->channel = Channel::query()->create();
+        $this->user->subscribe($this->channel);
+        $this->subscription = Subscription::query()->first();
     }
 
     public function testScopeWithType(): void
@@ -27,29 +43,33 @@ class SubscriptionTest extends TestCase
 
     public function testGetTable(): void
     {
-        /** @var \Zing\LaravelSubscribe\Subscription $subscription */
-        $subscription = Subscription::query()->first();
-        self::assertSame(config('subscribe.table_names.subscriptions'), $subscription->getTable());
+        self::assertSame(config('subscribe.table_names.subscriptions'), $this->subscription->getTable());
     }
 
     public function testSubscriber(): void
     {
-        /** @var \Zing\LaravelSubscribe\Subscription $subscription */
-        $subscription = Subscription::query()->first();
-        self::assertInstanceOf(User::class, $subscription->subscriber);
+        self::assertInstanceOf(User::class, $this->subscription->subscriber);
     }
 
     public function testSubscribable(): void
     {
-        /** @var \Zing\LaravelSubscribe\Subscription $subscription */
-        $subscription = Subscription::query()->first();
-        self::assertInstanceOf(Channel::class, $subscription->subscribable);
+        self::assertInstanceOf(Channel::class, $this->subscription->subscribable);
     }
 
     public function testUser(): void
     {
-        /** @var \Zing\LaravelSubscribe\Subscription $subscription */
-        $subscription = Subscription::query()->first();
-        self::assertInstanceOf(User::class, $subscription->user);
+        self::assertInstanceOf(User::class, $this->subscription->user);
+    }
+
+    public function testIsSubscribedTo(): void
+    {
+        self::assertTrue($this->subscription->isSubscribedTo($this->channel));
+        self::assertFalse($this->subscription->isSubscribedTo($this->user));
+    }
+
+    public function testIsSubscribedBy(): void
+    {
+        self::assertFalse($this->subscription->isSubscribedBy($this->channel));
+        self::assertTrue($this->subscription->isSubscribedBy($this->user));
     }
 }

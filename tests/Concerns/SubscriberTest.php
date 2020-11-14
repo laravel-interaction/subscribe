@@ -92,4 +92,14 @@ class SubscriberTest extends TestCase
         $user->toggleSubscribe($channel);
         self::assertFalse($user->hasSubscribed($channel));
     }
+
+    public function testHasNotSubscribed(): void
+    {
+        $user = User::query()->create();
+        $channel = Channel::query()->create();
+        $user->toggleSubscribe($channel);
+        self::assertFalse($user->hasNotSubscribed($channel));
+        $user->toggleSubscribe($channel);
+        self::assertTrue($user->hasNotSubscribed($channel));
+    }
 }
