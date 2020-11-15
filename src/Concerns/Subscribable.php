@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Zing\LaravelSubscribe\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -13,6 +14,9 @@ use function is_a;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Zing\LaravelSubscribe\Subscription[] $subscriptions
  * @property-read \Illuminate\Database\Eloquent\Collection|\Zing\LaravelSubscribe\Concerns\Subscriber[] $subscribers
  * @property-read int|null $subscribers_count
+ *
+ * @method static static|\Illuminate\Database\Eloquent\Builder whereSubscribedBy(\Illuminate\Database\Eloquent\Model $user)
+ * @method static static|\Illuminate\Database\Eloquent\Builder whereNotSubscribedBy(\Illuminate\Database\Eloquent\Model $user)
  */
 trait Subscribable
 {
@@ -79,5 +83,25 @@ trait Subscribable
         )->last(null, 1);
 
         return number_format(round($number / $divisor, $precision, $mode), $precision) . $divisors->get($divisor);
+    }
+
+    public function scopeWhereSubscribedBy(Builder $query, Model $user): Builder
+    {
+        return $query->whereHas(
+            'subscribers',
+            function (Builder $query) use ($user) {
+                return $query->whereKey($user->getKey());
+            }
+        );
+    }
+
+    public function scopeWhereNotSubscribedBy(Builder $query, Model $user): Builder
+    {
+        return $query->whereDoesntHave(
+            'subscribers',
+            function (Builder $query) use ($user) {
+                return $query->whereKey($user->getKey());
+            }
+        );
     }
 }

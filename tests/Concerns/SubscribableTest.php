@@ -90,4 +90,24 @@ class SubscribableTest extends TestCase
         $user->unsubscribe($channel);
         self::assertSame(0, $channel->subscribers()->count());
     }
+
+    public function testScopeWhereSubscribedBy(): void
+    {
+        $user = User::query()->create();
+        $other = User::query()->create();
+        $channel = Channel::query()->create();
+        $user->subscribe($channel);
+        self::assertSame(1, Channel::query()->whereSubscribedBy($user)->count());
+        self::assertSame(0, Channel::query()->whereSubscribedBy($other)->count());
+    }
+
+    public function testScopeWhereNotSubscribedBy(): void
+    {
+        $user = User::query()->create();
+        $other = User::query()->create();
+        $channel = Channel::query()->create();
+        $user->subscribe($channel);
+        self::assertSame(0, Channel::query()->whereNotSubscribedBy($user)->count());
+        self::assertSame(1, Channel::query()->whereNotSubscribedBy($other)->count());
+    }
 }
