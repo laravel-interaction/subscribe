@@ -20,6 +20,7 @@ class CreateSubscriptionsTable extends Migration
                 $table->unsignedBigInteger(config('subscribe.column_names.user_foreign_key'))->index()->comment('user_id');
                 $table->morphs('subscribable');
                 $table->timestamps();
+                $table->unique([config('subscribe.column_names.user_foreign_key'), 'subscribable_type', 'subscribable_id']);
             }
         );
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Zing\LaravelSubscribe\Tests;
 
+use Illuminate\Support\Carbon;
 use Zing\LaravelSubscribe\Subscription;
 use Zing\LaravelSubscribe\Tests\Models\Channel;
 use Zing\LaravelSubscribe\Tests\Models\User;
@@ -33,6 +34,12 @@ class SubscriptionTest extends TestCase
         $this->channel = Channel::query()->create();
         $this->user->subscribe($this->channel);
         $this->subscription = Subscription::query()->first();
+    }
+
+    public function testSubscriptionTimestamp(): void
+    {
+        self::assertInstanceOf(Carbon::class, $this->subscription->created_at);
+        self::assertInstanceOf(Carbon::class, $this->subscription->updated_at);
     }
 
     public function testScopeWithType(): void
