@@ -81,6 +81,20 @@ class SubscribableTest extends TestCase
         self::assertFalse($channel->isSubscribedBy($user));
     }
 
+    public function testIsNotSubscribedBy(): void
+    {
+        $user = User::query()->create();
+        $channel = Channel::query()->create();
+        self::assertTrue($channel->isNotSubscribedBy($channel));
+        $user->subscribe($channel);
+        self::assertFalse($channel->isNotSubscribedBy($user));
+        $channel->load('subscribers');
+        $user->unsubscribe($channel);
+        self::assertFalse($channel->isNotSubscribedBy($user));
+        $channel->load('subscribers');
+        self::assertTrue($channel->isNotSubscribedBy($user));
+    }
+
     public function testSubscribers(): void
     {
         $user = User::query()->create();

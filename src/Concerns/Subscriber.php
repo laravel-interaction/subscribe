@@ -68,6 +68,11 @@ trait Subscriber
             ->count() > 0;
     }
 
+    public function hasNotSubscribed(Model $object): bool
+    {
+        return ! $this->hasSubscribed($object);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

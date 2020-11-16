@@ -35,6 +35,11 @@ trait Subscribable
             ->where(config('subscribe.column_names.user_foreign_key'), $user->getKey())->count() > 0;
     }
 
+    public function isNotSubscribedBy(Model $user): bool
+    {
+        return ! $this->isSubscribedBy($user);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */

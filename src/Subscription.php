@@ -48,6 +48,16 @@ class Subscription extends Model
         return $this->user();
     }
 
+    public function isSubscribedBy(Model $user): bool
+    {
+        return $user->is($this->subscriber);
+    }
+
+    public function isSubscribedTo(Model $object): bool
+    {
+        return $object->is($this->subscribable);
+    }
+
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $type
