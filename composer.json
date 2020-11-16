@@ -1,7 +1,7 @@
 {
     "name": "zing/laravel-subscribe",
     "description": "User subscribe/unsubscribe behaviour for Laravel.",
-    "keywords": ["laravel", "subscribe"],
+    "keywords": ["laravel", "subscription", "subscribe"],
     "license": "MIT",
     "authors": [
         {

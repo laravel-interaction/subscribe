@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection|\Zing\LaravelSubscribe\Subscription[] $subscriptions
+ * @property-read int|null $subscriptions_count
  */
 trait Subscriber
 {
