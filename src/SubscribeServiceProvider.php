@@ -15,9 +15,17 @@ class SubscribeServiceProvider extends ServiceProvider
                 [
                     $this->getConfigPath() => config_path('subscribe.php'),
                 ],
-                'config'
+                'subscribe-config'
             );
-            $this->loadMigrationsFrom(__DIR__ . '/../migrations');
+            $this->publishes(
+                [
+                    $this->getMigrationsPath() => database_path('migrations'),
+                ],
+                'subscribe-migrations'
+            );
+            if ($this->shouldLoadMigrations()) {
+                $this->loadMigrationsFrom($this->getMigrationsPath());
+            }
         }
     }
 
@@ -29,5 +37,15 @@ class SubscribeServiceProvider extends ServiceProvider
     protected function getConfigPath(): string
     {
         return __DIR__ . '/../config/subscribe.php';
+    }
+
+    protected function getMigrationsPath(): string
+    {
+        return __DIR__ . '/../migrations';
+    }
+
+    private function shouldLoadMigrations()
+    {
+        return config('subscribe.load_migrations');
     }
 }

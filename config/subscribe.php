@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Zing\LaravelSubscribe\Subscription;
 
 return [
+    'load_migrations' => true,
     'models' => [
         'user' => \App\User::class,
         'subscription' => Subscription::class,

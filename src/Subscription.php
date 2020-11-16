@@ -7,6 +7,7 @@ namespace Zing\LaravelSubscribe;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
@@ -17,8 +18,10 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Zing\LaravelSubscribe\Subscription|\Illuminate\Database\Eloquent\Builder withType(string $type)
  * @method static \Zing\LaravelSubscribe\Subscription|\Illuminate\Database\Eloquent\Builder query()
  */
-class Subscription extends Model
+class Subscription extends MorphPivot
 {
+    public $incrementing = true;
+
     public function getTable()
     {
         return config('subscribe.table_names.subscriptions') ?: parent::getTable();

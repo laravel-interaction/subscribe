@@ -90,6 +90,7 @@ class SubscriberTest extends TestCase
         $user->toggleSubscribe($channel);
         self::assertTrue($user->hasSubscribed($channel));
         $user->toggleSubscribe($channel);
+        $user->load('subscriptions');
         self::assertFalse($user->hasSubscribed($channel));
     }
 

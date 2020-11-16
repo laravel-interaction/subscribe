@@ -57,13 +57,13 @@ trait Subscribable
      */
     public function subscribers(): BelongsToMany
     {
-        return $this->belongsToMany(
+        return $this->morphToMany(
             config('subscribe.models.user'),
-            config('subscribe.table_names.subscriptions'),
-            'subscribable_id',
+            'subscribable',
+            config('subscribe.models.subscription'),
+            null,
             config('subscribe.column_names.user_foreign_key')
-        )
-            ->where('subscribable_type', $this->getMorphClass());
+        )->withTimestamps();
     }
 
     public function subscribersCount(): int
