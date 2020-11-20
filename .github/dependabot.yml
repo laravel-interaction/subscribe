@@ -10,7 +10,13 @@ updates:
     schedule:
       interval: "daily"
     versioning-strategy: widen
+    labels:
+      - "dependencies"
+      - "automerge"
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    labels:
+      - "dependencies"
+      - "automerge"
