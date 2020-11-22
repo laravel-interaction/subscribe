@@ -87,6 +87,10 @@ trait Subscribable
             }
         )->last(null, 1);
 
+        if ($divisor === 1) {
+            return (string) $number;
+        }
+
         return number_format(round($number / $divisor, $precision, $mode), $precision) . $divisors->get($divisor);
     }
 
