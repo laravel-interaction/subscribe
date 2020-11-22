@@ -7,3 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- changelog-linker -->
 
 ## Unreleased
+
+### Added
+
+- [#5] Add methods to get subscribed/notsubscribed items
+- [#4] Add more compare methods
+- [#3] Add subscribers count for humans
+
+### Changed
+
+- [#7] Bump codecov/codecov-action from v1.0.14 to v1.0.15
+- [#6] Switch belongsToMany to morphToMany
+
+[#7]: https://github.com/zingimmick/laravel-subscribe/pull/7
+[#6]: https://github.com/zingimmick/laravel-subscribe/pull/6
+[#5]: https://github.com/zingimmick/laravel-subscribe/pull/5
+[#4]: https://github.com/zingimmick/laravel-subscribe/pull/4
+[#3]: https://github.com/zingimmick/laravel-subscribe/pull/3
