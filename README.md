@@ -4,7 +4,7 @@ User subscribe/unsubscribe behaviour for Laravel.
 
 <p align="center">
 <a href="https://github.com/zingimmick/laravel-subscribe/actions"><img src="https://github.com/zingimmick/laravel-subscribe/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://codecov.io/gh/zingimmick/laravel-subscribe"><img src="https://codecov.io/gh/zingimmick/laravel-subscribe/branch/main/graph/badge.svg" alt="Code Coverage" /></a>
+<a href="https://codecov.io/gh/zingimmick/laravel-subscribe"><img src="https://codecov.io/gh/zingimmick/laravel-subscribe/branch/master/graph/badge.svg" alt="Code Coverage" /></a>
 <a href="https://packagist.org/packages/zing/laravel-subscribe"><img src="https://poser.pugx.org/zing/laravel-subscribe/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/zing/laravel-subscribe"><img src="https://poser.pugx.org/zing/laravel-subscribe/downloads" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/zing/laravel-subscribe"><img src="https://poser.pugx.org/zing/laravel-subscribe/v/unstable.svg" alt="Latest Unstable Version"></a>
