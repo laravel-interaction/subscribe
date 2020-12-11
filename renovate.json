@@ -1,6 +1,5 @@
 {
   "extends": [
-    "config:base",
-    ":preserveSemverRanges"
+    "github>zingimmick/package-skeleton-php"
   ]
 }
