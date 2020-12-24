@@ -28,7 +28,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ]
     );
     $parameters->set(
-        Option::EXCLUDE_RECTORS,
+        Option::SKIP,
         [
             FinalizeClassesWithoutChildrenRector::class,
             ChangeReadOnlyVariableWithDefaultValueToConstantRector::class,
