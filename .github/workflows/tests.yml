@@ -37,10 +37,6 @@ jobs:
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - name: Remove dev dependencies not support for PHP 8.0
-        run: composer remove zing/coding-standard --dev --no-update
-        if: "matrix.php >= 8"
-
       - name: Install dependencies
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
