@@ -35,7 +35,7 @@ trait Subscribable
             return $this->subscribers->contains($user);
         }
 
-        return tap($this->relationLoaded('subscriptions') ? $this->subscriptions : $this->subscriptions())
+        return ($this->relationLoaded('subscriptions') ? $this->subscriptions : $this->subscriptions())
             ->where(config('subscribe.column_names.user_foreign_key'), $user->getKey())->count() > 0;
     }
 
