@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- [#13] Bump codecov/codecov-action from v1.1.0 to v1.1.1
+- [#12] Bump codecov/codecov-action from v1.0.15 to v1.1.0
+- [#11] Bump paambaati/codeclimate-action from v2.7.4 to v2.7.5
+
+## [0.0.2] - 2020-11-22
+
+### Changed
+
+- [#8] Make the subscribers count more readable
+
+## [0.0.1] - 2020-11-22
+
 ### Added
 
 - [#5] Add methods to get subscribed/notsubscribed items
@@ -24,3 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#5]: https://github.com/zingimmick/laravel-subscribe/pull/5
 [#4]: https://github.com/zingimmick/laravel-subscribe/pull/4
 [#3]: https://github.com/zingimmick/laravel-subscribe/pull/3
+[#13]: https://github.com/zingimmick/laravel-subscribe/pull/13
+[#12]: https://github.com/zingimmick/laravel-subscribe/pull/12
+[#11]: https://github.com/zingimmick/laravel-subscribe/pull/11
+[#8]: https://github.com/zingimmick/laravel-subscribe/pull/8
