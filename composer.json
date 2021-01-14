@@ -9,8 +9,6 @@
             "email": "zingimmick@outlook.com"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "config": {
         "sort-packages": true,
         "preferred-install": "dist"
@@ -60,5 +58,7 @@
         "test": [
             "@test:phpunit"
         ]
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
