@@ -98,6 +98,13 @@ $channels->each(function (Channel $channel){
 });
 ```
 
+### Events
+
+| Event | Fired |
+| --- | --- |
+| `Zing\LaravelSubscribe\Events\Subscribed` | When an object get subscribed. |
+| `Zing\LaravelSubscribe\Events\Unsubscribed` | When an object get unsubscribed. |
+
 ## License
 
 Laravel Subscribe is an open-sourced software licensed under the [MIT license](LICENSE).

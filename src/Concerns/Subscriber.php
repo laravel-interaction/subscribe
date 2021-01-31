@@ -19,6 +19,10 @@ trait Subscriber
      */
     public function subscribe(Model $object): void
     {
+        if ($this->hasSubscribed($object)) {
+            return;
+        }
+
         $this->subscribedItems(get_class($object))->attach($object->getKey());
     }
 

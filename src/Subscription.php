@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Zing\LaravelSubscribe\Events\Subscribed;
+use Zing\LaravelSubscribe\Events\Unsubscribed;
 
 /**
  * @property \Illuminate\Database\Eloquent\Model $user
@@ -21,6 +23,11 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Subscription extends MorphPivot
 {
     public $incrementing = true;
+
+    protected $dispatchesEvents = [
+        'created' => Subscribed::class,
+        'deleted' => Unsubscribed::class,
+    ];
 
     public function getTable()
     {
