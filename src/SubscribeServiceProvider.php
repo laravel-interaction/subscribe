@@ -46,6 +46,6 @@ class SubscribeServiceProvider extends ServiceProvider
 
     private function shouldLoadMigrations(): bool
     {
-        return config('subscribe.load_migrations');
+        return (bool) config('subscribe.load_migrations');
     }
 }
