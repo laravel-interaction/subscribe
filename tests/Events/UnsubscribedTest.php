@@ -29,6 +29,7 @@ class UnsubscribedTest extends TestCase
         $user->subscribe($channel);
         Event::fake();
         $user->unsubscribe($channel);
+        $user->unsubscribe($channel);
         Event::assertDispatchedTimes(Unsubscribed::class);
     }
 

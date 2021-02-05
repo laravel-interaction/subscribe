@@ -33,6 +33,10 @@ trait Subscriber
      */
     public function unsubscribe(Model $object): void
     {
+        if ($this->hasNotSubscribed($object)) {
+            return;
+        }
+
         $this->subscribedItems(get_class($object))->detach($object->getKey());
     }
 
