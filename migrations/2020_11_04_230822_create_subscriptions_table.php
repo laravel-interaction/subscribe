@@ -16,7 +16,7 @@ class CreateSubscriptionsTable extends Migration
         Schema::create(
             config('subscribe.table_names.subscriptions'),
             function (Blueprint $table): void {
-                $table->bigIncrements('id');
+             config('subscribe.uuids')?$table->uuid('uuid'):   $table->bigIncrements('id');
                 $table->unsignedBigInteger(config('subscribe.column_names.user_foreign_key'))->index()->comment('user_id');
                 $table->morphs('subscribable');
                 $table->timestamps();
