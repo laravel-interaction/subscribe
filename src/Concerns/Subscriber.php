@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
- * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Subscription[] $subscriptions
- * @property-read int|null $subscriptions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Subscription[] $subscriberSubscriptions
+ * @property-read int|null $subscriber_subscriptions_count
  */
 trait Subscriber
 {
@@ -57,7 +57,7 @@ trait Subscriber
      */
     public function hasSubscribed(Model $object): bool
     {
-        return ($this->relationLoaded('subscriptions') ? $this->subscriptions : $this->subscriptions())
+        return ($this->relationLoaded('subscriberSubscriptions') ? $this->subscriberSubscriptions : $this->subscriberSubscriptions())
             ->where('subscribable_id', $object->getKey())
             ->where('subscribable_type', $object->getMorphClass())
             ->count() > 0;
@@ -71,7 +71,7 @@ trait Subscriber
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subscriptions(): HasMany
+    public function subscriberSubscriptions(): HasMany
     {
         return $this->hasMany(config('subscribe.models.subscription'), config('subscribe.column_names.user_foreign_key'), $this->getKeyName());
     }
