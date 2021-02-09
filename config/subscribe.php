@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Zing\LaravelSubscribe\Subscription;
+use LaravelInteraction\Subscribe\Subscription;
 
 return [
     'load_migrations' => true,

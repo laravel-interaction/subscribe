@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe;
+namespace LaravelInteraction\Subscribe;
 
 use Illuminate\Support\ServiceProvider;
 

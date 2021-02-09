@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe\Tests;
+namespace LaravelInteraction\Subscribe\Tests;
 
 use Illuminate\Support\Carbon;
-use Zing\LaravelSubscribe\Subscription;
-use Zing\LaravelSubscribe\Tests\Models\Channel;
-use Zing\LaravelSubscribe\Tests\Models\User;
+use LaravelInteraction\Subscribe\Subscription;
+use LaravelInteraction\Subscribe\Tests\Models\Channel;
+use LaravelInteraction\Subscribe\Tests\Models\User;
 
 class SubscriptionTest extends TestCase
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\Zing\LaravelSubscribe\Tests\Models\User
+     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\LaravelInteraction\Subscribe\Tests\Models\User
      */
     protected $user;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\Zing\LaravelSubscribe\Tests\Models\Channel
+     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\LaravelInteraction\Subscribe\Tests\Models\Channel
      */
     protected $channel;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|\Zing\LaravelSubscribe\Subscription|null
+     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|\LaravelInteraction\Subscribe\Subscription|null
      */
     protected $subscription;
 

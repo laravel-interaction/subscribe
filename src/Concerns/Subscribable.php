@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe\Concerns;
+namespace LaravelInteraction\Subscribe\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use function is_a;
 
 /**
- * @property-read \Illuminate\Database\Eloquent\Collection|\Zing\LaravelSubscribe\Subscription[] $subscriptions
- * @property-read \Illuminate\Database\Eloquent\Collection|\Zing\LaravelSubscribe\Concerns\Subscriber[] $subscribers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Subscription[] $subscriptions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Concerns\Subscriber[] $subscribers
  * @property-read int|null $subscribers_count
  *
  * @method static static|\Illuminate\Database\Eloquent\Builder whereSubscribedBy(\Illuminate\Database\Eloquent\Model $user)

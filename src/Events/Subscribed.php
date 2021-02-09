@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe\Events;
+namespace LaravelInteraction\Subscribe\Events;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe\Tests\Events;
+namespace LaravelInteraction\Subscribe\Tests\Events;
 
 use Illuminate\Support\Facades\Event;
-use Zing\LaravelSubscribe\Events\Unsubscribed;
-use Zing\LaravelSubscribe\Tests\Models\Channel;
-use Zing\LaravelSubscribe\Tests\Models\User;
-use Zing\LaravelSubscribe\Tests\TestCase;
+use LaravelInteraction\Subscribe\Events\Unsubscribed;
+use LaravelInteraction\Subscribe\Tests\Models\Channel;
+use LaravelInteraction\Subscribe\Tests\Models\User;
+use LaravelInteraction\Subscribe\Tests\TestCase;
 
 class UnsubscribedTest extends TestCase
 {

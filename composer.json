@@ -1,5 +1,5 @@
 {
-    "name": "zing/laravel-subscribe",
+    "name": "laravel-interaction/subscribe",
     "description": "User subscribe/unsubscribe behaviour for Laravel.",
     "keywords": ["laravel", "subscription", "subscribe"],
     "license": "MIT",
@@ -27,18 +27,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Zing\\LaravelSubscribe\\": "src"
+            "LaravelInteraction\\Subscribe\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Zing\\LaravelSubscribe\\Tests\\": "tests"
+            "LaravelInteraction\\Subscribe\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Zing\\LaravelSubscribe\\SubscribeServiceProvider"
+                "LaravelInteraction\\Subscribe\\SubscribeServiceProvider"
             ]
         }
     },

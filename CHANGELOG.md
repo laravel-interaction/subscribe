@@ -31,12 +31,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#7] Bump codecov/codecov-action from v1.0.14 to v1.0.15
 - [#6] Switch belongsToMany to morphToMany
 
-[#7]: https://github.com/zingimmick/laravel-subscribe/pull/7
-[#6]: https://github.com/zingimmick/laravel-subscribe/pull/6
-[#5]: https://github.com/zingimmick/laravel-subscribe/pull/5
-[#4]: https://github.com/zingimmick/laravel-subscribe/pull/4
-[#3]: https://github.com/zingimmick/laravel-subscribe/pull/3
-[#13]: https://github.com/zingimmick/laravel-subscribe/pull/13
-[#12]: https://github.com/zingimmick/laravel-subscribe/pull/12
-[#11]: https://github.com/zingimmick/laravel-subscribe/pull/11
-[#8]: https://github.com/zingimmick/laravel-subscribe/pull/8
+[#7]: https://github.com/laravel-interaction/subscribe/pull/7
+[#6]: https://github.com/laravel-interaction/subscribe/pull/6
+[#5]: https://github.com/laravel-interaction/subscribe/pull/5
+[#4]: https://github.com/laravel-interaction/subscribe/pull/4
+[#3]: https://github.com/laravel-interaction/subscribe/pull/3
+[#13]: https://github.com/laravel-interaction/subscribe/pull/13
+[#12]: https://github.com/laravel-interaction/subscribe/pull/12
+[#11]: https://github.com/laravel-interaction/subscribe/pull/11
+[#8]: https://github.com/laravel-interaction/subscribe/pull/8

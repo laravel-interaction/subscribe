@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe\Tests;
+namespace LaravelInteraction\Subscribe\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use LaravelInteraction\Subscribe\SubscribeServiceProvider;
+use LaravelInteraction\Subscribe\Tests\Models\User;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Zing\LaravelSubscribe\SubscribeServiceProvider;
-use Zing\LaravelSubscribe\Tests\Models\User;
 
 class TestCase extends BaseTestCase
 {

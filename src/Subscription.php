@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe;
+namespace LaravelInteraction\Subscribe;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -10,16 +10,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Str;
-use Zing\LaravelSubscribe\Events\Subscribed;
-use Zing\LaravelSubscribe\Events\Unsubscribed;
+use LaravelInteraction\Subscribe\Events\Subscribed;
+use LaravelInteraction\Subscribe\Events\Unsubscribed;
 
 /**
  * @property \Illuminate\Database\Eloquent\Model $user
  * @property \Illuminate\Database\Eloquent\Model $subscriber
  * @property \Illuminate\Database\Eloquent\Model $subscribable
  *
- * @method static \Zing\LaravelSubscribe\Subscription|\Illuminate\Database\Eloquent\Builder withType(string $type)
- * @method static \Zing\LaravelSubscribe\Subscription|\Illuminate\Database\Eloquent\Builder query()
+ * @method static \LaravelInteraction\Subscribe\Subscription|\Illuminate\Database\Eloquent\Builder withType(string $type)
+ * @method static \LaravelInteraction\Subscribe\Subscription|\Illuminate\Database\Eloquent\Builder query()
  */
 class Subscription extends MorphPivot
 {

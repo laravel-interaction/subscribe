@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe\Concerns;
+namespace LaravelInteraction\Subscribe\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
- * @property-read \Illuminate\Database\Eloquent\Collection|\Zing\LaravelSubscribe\Subscription[] $subscriptions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Subscription[] $subscriptions
  * @property-read int|null $subscriptions_count
  */
 trait Subscriber

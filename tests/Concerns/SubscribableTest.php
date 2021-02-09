@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe\Tests\Concerns;
+namespace LaravelInteraction\Subscribe\Tests\Concerns;
 
+use LaravelInteraction\Subscribe\Tests\Models\Channel;
+use LaravelInteraction\Subscribe\Tests\Models\User;
+use LaravelInteraction\Subscribe\Tests\TestCase;
 use Mockery;
-use Zing\LaravelSubscribe\Tests\Models\Channel;
-use Zing\LaravelSubscribe\Tests\Models\User;
-use Zing\LaravelSubscribe\Tests\TestCase;
 
 class SubscribableTest extends TestCase
 {

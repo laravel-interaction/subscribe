@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Zing\LaravelSubscribe\Tests\Models;
+namespace LaravelInteraction\Subscribe\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Zing\LaravelSubscribe\Concerns\Subscribable;
+use LaravelInteraction\Subscribe\Concerns\Subscribable;
 
 /**
- * @method static \Zing\LaravelSubscribe\Tests\Models\Channel|\Illuminate\Database\Eloquent\Builder query()
+ * @method static \LaravelInteraction\Subscribe\Tests\Models\Channel|\Illuminate\Database\Eloquent\Builder query()
  */
 class Channel extends Model
 {
