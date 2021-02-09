@@ -17,7 +17,7 @@ class UnsubscribedTest extends TestCase
         $user = User::query()->create();
         $channel = Channel::query()->create();
         $user->subscribe($channel);
-        Event::fake();
+        Event::fake([Unsubscribed::class]);
         $user->unsubscribe($channel);
         Event::assertDispatchedTimes(Unsubscribed::class);
     }
@@ -27,7 +27,7 @@ class UnsubscribedTest extends TestCase
         $user = User::query()->create();
         $channel = Channel::query()->create();
         $user->subscribe($channel);
-        Event::fake();
+        Event::fake([Unsubscribed::class]);
         $user->unsubscribe($channel);
         $user->unsubscribe($channel);
         Event::assertDispatchedTimes(Unsubscribed::class);
@@ -37,7 +37,7 @@ class UnsubscribedTest extends TestCase
     {
         $user = User::query()->create();
         $channel = Channel::query()->create();
-        Event::fake();
+        Event::fake([Unsubscribed::class]);
         $user->toggleSubscribe($channel);
         $user->toggleSubscribe($channel);
         Event::assertDispatchedTimes(Unsubscribed::class);

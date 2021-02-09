@@ -16,7 +16,7 @@ class SubscribedTest extends TestCase
     {
         $user = User::query()->create();
         $channel = Channel::query()->create();
-        Event::fake();
+        Event::fake([Subscribed::class]);
         $user->subscribe($channel);
         Event::assertDispatchedTimes(Subscribed::class);
     }
@@ -25,7 +25,7 @@ class SubscribedTest extends TestCase
     {
         $user = User::query()->create();
         $channel = Channel::query()->create();
-        Event::fake();
+        Event::fake([Subscribed::class]);
         $user->subscribe($channel);
         $user->subscribe($channel);
         $user->subscribe($channel);
@@ -36,7 +36,7 @@ class SubscribedTest extends TestCase
     {
         $user = User::query()->create();
         $channel = Channel::query()->create();
-        Event::fake();
+        Event::fake([Subscribed::class]);
         $user->toggleSubscribe($channel);
         Event::assertDispatchedTimes(Subscribed::class);
     }

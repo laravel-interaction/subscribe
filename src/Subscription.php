@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Str;
 use Zing\LaravelSubscribe\Events\Subscribed;
 use Zing\LaravelSubscribe\Events\Unsubscribed;
 
@@ -22,7 +23,38 @@ use Zing\LaravelSubscribe\Events\Unsubscribed;
  */
 class Subscription extends MorphPivot
 {
-    public $incrementing = true;
+    protected function uuids(): bool
+    {
+        return (bool) config('subscribe.uuids');
+    }
+
+    public function getIncrementing(): bool
+    {
+        return $this->uuids() ? true : parent::getIncrementing();
+    }
+
+    public function getKeyName(): string
+    {
+        return $this->uuids() ? 'uuid' : parent::getKeyName();
+    }
+
+    public function getKeyType(): string
+    {
+        return $this->uuids() ? 'string' : parent::getKeyType();
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(
+            function (self $like): void {
+                if ($like->uuids()) {
+                    $like->{$like->getKeyName()} = Str::orderedUuid();
+                }
+            }
+        );
+    }
 
     protected $dispatchesEvents = [
         'created' => Subscribed::class,
