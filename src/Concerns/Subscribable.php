@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use function is_a;
 
 /**
- * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Subscription[] $subscriptions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Subscription[] $subscribableSubscriptions
  * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Concerns\Subscriber[] $subscribers
  * @property-read int|null $subscribers_count
  *
@@ -35,7 +35,7 @@ trait Subscribable
             return $this->subscribers->contains($user);
         }
 
-        return ($this->relationLoaded('subscriptions') ? $this->subscriptions : $this->subscriptions())
+        return ($this->relationLoaded('subscribableSubscriptions') ? $this->subscribableSubscriptions : $this->subscribableSubscriptions())
             ->where(config('subscribe.column_names.user_foreign_key'), $user->getKey())->count() > 0;
     }
 
@@ -47,7 +47,7 @@ trait Subscribable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function subscriptions(): MorphMany
+    public function subscribableSubscriptions(): MorphMany
     {
         return $this->morphMany(config('subscribe.models.subscription'), 'subscribable');
     }

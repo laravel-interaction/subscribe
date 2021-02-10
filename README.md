@@ -62,10 +62,10 @@ $user->hasSubscribed($channel);
 $user->hasNotSubscribed($channel);
 
 // Get subscribed info
-$user->subscriptions()->count(); 
+$user->subscriberSubscriptions()->count(); 
 
 // with type
-$user->subscriptions()->withType(Channel::class)->count(); 
+$user->subscriberSubscriptions()->withType(Channel::class)->count(); 
 
 // get subscribed channels
 Channel::query()->whereSubscribedBy($user)->get();

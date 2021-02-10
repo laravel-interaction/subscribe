@@ -11,25 +11,43 @@ use Mockery;
 
 class SubscribableTest extends TestCase
 {
-    public function testSubscriptions(): void
+    public function modelClasses(): array
     {
-        $user = User::query()->create();
-        $channel = Channel::query()->create();
-        $user->subscribe($channel);
-        self::assertSame(1, $channel->subscriptions()->count());
-        self::assertSame(1, $channel->subscriptions->count());
+        return[
+            [Channel::class],
+            [User::class],
+        ];
     }
 
-    public function testSubscribersCount(): void
+    /**
+     * @dataProvider modelClasses
+     *
+     * @param \LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel|string $modelClass
+     */
+    public function testSubscriptions(string $modelClass): void
     {
         $user = User::query()->create();
-        $channel = Channel::query()->create();
-        $user->subscribe($channel);
-        self::assertSame(1, $channel->subscribersCount());
-        $user->unsubscribe($channel);
-        self::assertSame(1, $channel->subscribersCount());
-        $channel->loadCount('subscribers');
-        self::assertSame(0, $channel->subscribersCount());
+        $model = $modelClass::query()->create();
+        $user->subscribe($model);
+        self::assertSame(1, $model->subscribableSubscriptions()->count());
+        self::assertSame(1, $model->subscribableSubscriptions->count());
+    }
+
+    /**
+     * @dataProvider modelClasses
+     *
+     * @param \LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel|string $modelClass
+     */
+    public function testSubscribersCount(string $modelClass): void
+    {
+        $user = User::query()->create();
+        $model = $modelClass::query()->create();
+        $user->subscribe($model);
+        self::assertSame(1, $model->subscribersCount());
+        $user->unsubscribe($model);
+        self::assertSame(1, $model->subscribersCount());
+        $model->loadCount('subscribers');
+        self::assertSame(0, $model->subscribersCount());
     }
 
     public function data(): array
@@ -67,61 +85,86 @@ class SubscribableTest extends TestCase
         self::assertSame($halfDown, $channel->subscribersCountForHumans(2, PHP_ROUND_HALF_DOWN));
     }
 
-    public function testIsSubscribedBy(): void
+    /**
+     * @dataProvider modelClasses
+     *
+     * @param \LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel|string $modelClass
+     */
+    public function testIsSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
-        $channel = Channel::query()->create();
-        self::assertFalse($channel->isSubscribedBy($channel));
-        $user->subscribe($channel);
-        self::assertTrue($channel->isSubscribedBy($user));
-        $channel->load('subscribers');
-        $user->unsubscribe($channel);
-        self::assertTrue($channel->isSubscribedBy($user));
-        $channel->load('subscribers');
-        self::assertFalse($channel->isSubscribedBy($user));
+        $model = $modelClass::query()->create();
+        self::assertFalse($model->isSubscribedBy($model));
+        $user->subscribe($model);
+        self::assertTrue($model->isSubscribedBy($user));
+        $model->load('subscribers');
+        $user->unsubscribe($model);
+        self::assertTrue($model->isSubscribedBy($user));
+        $model->load('subscribers');
+        self::assertFalse($model->isSubscribedBy($user));
     }
 
-    public function testIsNotSubscribedBy(): void
+    /**
+     * @dataProvider modelClasses
+     *
+     * @param \LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel|string $modelClass
+     */
+    public function testIsNotSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
-        $channel = Channel::query()->create();
-        self::assertTrue($channel->isNotSubscribedBy($channel));
-        $user->subscribe($channel);
-        self::assertFalse($channel->isNotSubscribedBy($user));
-        $channel->load('subscribers');
-        $user->unsubscribe($channel);
-        self::assertFalse($channel->isNotSubscribedBy($user));
-        $channel->load('subscribers');
-        self::assertTrue($channel->isNotSubscribedBy($user));
+        $model = $modelClass::query()->create();
+        self::assertTrue($model->isNotSubscribedBy($model));
+        $user->subscribe($model);
+        self::assertFalse($model->isNotSubscribedBy($user));
+        $model->load('subscribers');
+        $user->unsubscribe($model);
+        self::assertFalse($model->isNotSubscribedBy($user));
+        $model->load('subscribers');
+        self::assertTrue($model->isNotSubscribedBy($user));
     }
 
-    public function testSubscribers(): void
+    /**
+     * @dataProvider modelClasses
+     *
+     * @param \LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel|string $modelClass
+     */
+    public function testSubscribers(string $modelClass): void
     {
         $user = User::query()->create();
-        $channel = Channel::query()->create();
-        $user->subscribe($channel);
-        self::assertSame(1, $channel->subscribers()->count());
-        $user->unsubscribe($channel);
-        self::assertSame(0, $channel->subscribers()->count());
+        $model = $modelClass::query()->create();
+        $user->subscribe($model);
+        self::assertSame(1, $model->subscribers()->count());
+        $user->unsubscribe($model);
+        self::assertSame(0, $model->subscribers()->count());
     }
 
-    public function testScopeWhereSubscribedBy(): void
+    /**
+     * @dataProvider modelClasses
+     *
+     * @param \LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel|string $modelClass
+     */
+    public function testScopeWhereSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $other = User::query()->create();
-        $channel = Channel::query()->create();
-        $user->subscribe($channel);
-        self::assertSame(1, Channel::query()->whereSubscribedBy($user)->count());
-        self::assertSame(0, Channel::query()->whereSubscribedBy($other)->count());
+        $model = $modelClass::query()->create();
+        $user->subscribe($model);
+        self::assertSame(1, $modelClass::query()->whereSubscribedBy($user)->count());
+        self::assertSame(0, $modelClass::query()->whereSubscribedBy($other)->count());
     }
 
-    public function testScopeWhereNotSubscribedBy(): void
+    /**
+     * @dataProvider modelClasses
+     *
+     * @param \LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel|string $modelClass
+     */
+    public function testScopeWhereNotSubscribedBy($modelClass): void
     {
         $user = User::query()->create();
         $other = User::query()->create();
-        $channel = Channel::query()->create();
-        $user->subscribe($channel);
-        self::assertSame(0, Channel::query()->whereNotSubscribedBy($user)->count());
-        self::assertSame(1, Channel::query()->whereNotSubscribedBy($other)->count());
+        $model = $modelClass::query()->create();
+        $user->subscribe($model);
+        self::assertSame($modelClass::query()->whereKeyNot($model->getKey())->count(), $modelClass::query()->whereNotSubscribedBy($user)->count());
+        self::assertSame($modelClass::query()->count(), $modelClass::query()->whereNotSubscribedBy($other)->count());
     }
 }

@@ -79,8 +79,8 @@ class SubscriberTest extends TestCase
         $user = User::query()->create();
         $channel = Channel::query()->create();
         $user->toggleSubscribe($channel);
-        self::assertSame(1, $user->subscriptions()->count());
-        self::assertSame(1, $user->subscriptions->count());
+        self::assertSame(1, $user->subscriberSubscriptions()->count());
+        self::assertSame(1, $user->subscriberSubscriptions->count());
     }
 
     public function testHasSubscribed(): void
@@ -90,7 +90,7 @@ class SubscriberTest extends TestCase
         $user->toggleSubscribe($channel);
         self::assertTrue($user->hasSubscribed($channel));
         $user->toggleSubscribe($channel);
-        $user->load('subscriptions');
+        $user->load('subscriberSubscriptions');
         self::assertFalse($user->hasSubscribed($channel));
     }
 
