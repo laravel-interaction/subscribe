@@ -8,6 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- [#17] Add events
+
+### Changed
+
+- [#20] Support subscribable for subscriber
+- [#19] Support uuids for subscriptions
+- [#18] Bump actions/cache from v2 to v2.1.4
+- [#16] Bump codecov/codecov-action from v1.2.0 to v1.2.1
+- [#15] Bump codecov/codecov-action from v1.1.1 to v1.2.0
+
+## [0.1.0] - 2021-01-04
+
 - [#13] Bump codecov/codecov-action from v1.1.0 to v1.1.1
 - [#12] Bump codecov/codecov-action from v1.0.15 to v1.1.0
 - [#11] Bump paambaati/codeclimate-action from v2.7.4 to v2.7.5
@@ -40,3 +54,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#12]: https://github.com/laravel-interaction/subscribe/pull/12
 [#11]: https://github.com/laravel-interaction/subscribe/pull/11
 [#8]: https://github.com/laravel-interaction/subscribe/pull/8
+[#20]: https://github.com/laravel-interaction/subscribe/pull/20
+[#19]: https://github.com/laravel-interaction/subscribe/pull/19
+[#18]: https://github.com/laravel-interaction/subscribe/pull/18
+[#17]: https://github.com/laravel-interaction/subscribe/pull/17
+[#16]: https://github.com/laravel-interaction/subscribe/pull/16
+[#15]: https://github.com/laravel-interaction/subscribe/pull/15
+[0.1.0]: https://github.com/laravel-interaction/subscribe/compare/0.0.2...0.1.0
+[0.0.2]: https://github.com/laravel-interaction/subscribe/compare/0.0.1...0.0.2
