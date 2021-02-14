@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace LaravelInteraction\Subscribe\Concerns;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use LaravelInteraction\Support\Interaction;
 use function is_a;
 
 /**
@@ -79,19 +81,7 @@ trait Subscribable
 
     public function subscribersCountForHumans($precision = 1, $mode = PHP_ROUND_HALF_UP, $divisors = null): string
     {
-        $number = $this->subscribersCount();
-        $divisors = collect($divisors ?? config('subscribe.divisors'));
-        $divisor = $divisors->keys()->filter(
-            function ($divisor) use ($number) {
-                return $divisor <= abs($number);
-            }
-        )->last(null, 1);
-
-        if ($divisor === 1) {
-            return (string) $number;
-        }
-
-        return number_format(round($number / $divisor, $precision, $mode), $precision) . $divisors->get($divisor);
+        return Interaction::numberForHumans($this->subscribersCount(), $precision, $mode, $divisors ?? config('subscribe.divisors'));
     }
 
     public function scopeWhereSubscribedBy(Builder $query, Model $user): Builder

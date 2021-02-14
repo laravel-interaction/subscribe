@@ -7,7 +7,6 @@ namespace LaravelInteraction\Subscribe\Tests\Concerns;
 use LaravelInteraction\Subscribe\Tests\Models\Channel;
 use LaravelInteraction\Subscribe\Tests\Models\User;
 use LaravelInteraction\Subscribe\Tests\TestCase;
-use Mockery;
 
 class SubscribableTest extends TestCase
 {
@@ -50,39 +49,17 @@ class SubscribableTest extends TestCase
         self::assertSame(0, $model->subscribersCount());
     }
 
-    public function data(): array
-    {
-        return [
-            [0, '0', '0', '0'],
-            [1, '1', '1', '1'],
-            [12, '12', '12', '12'],
-            [123, '123', '123', '123'],
-            [12345, '12.3K', '12.35K', '12.34K'],
-            [1234567, '1.2M', '1.23M', '1.23M'],
-            [123456789, '123.5M', '123.46M', '123.46M'],
-            [12345678901, '12.3B', '12.35B', '12.35B'],
-            [1234567890123, '1.2T', '1.23T', '1.23T'],
-            [1234567890123456, '1.2Qa', '1.23Qa', '1.23Qa'],
-            [1234567890123456789, '1.2Qi', '1.23Qi', '1.23Qi'],
-        ];
-    }
-
     /**
-     * @dataProvider data
+     * @dataProvider modelClasses
      *
-     * @param mixed $actual
-     * @param mixed $onePrecision
-     * @param mixed $twoPrecision
-     * @param mixed $halfDown
+     * @param \LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel|string $modelClass
      */
-    public function testSubscribersCountForHumans($actual, $onePrecision, $twoPrecision, $halfDown): void
+    public function testSubscribersCountForHumans(string $modelClass): void
     {
-        $channel = Mockery::mock(Channel::class);
-        $channel->shouldReceive('subscribersCountForHumans')->passthru();
-        $channel->shouldReceive('subscribersCount')->andReturn($actual);
-        self::assertSame($onePrecision, $channel->subscribersCountForHumans());
-        self::assertSame($twoPrecision, $channel->subscribersCountForHumans(2));
-        self::assertSame($halfDown, $channel->subscribersCountForHumans(2, PHP_ROUND_HALF_DOWN));
+        $user = User::query()->create();
+        $model = $modelClass::query()->create();
+        $user->subscribe($model);
+        self::assertSame('1', $model->subscribersCountForHumans());
     }
 
     /**
