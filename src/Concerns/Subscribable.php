@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace LaravelInteraction\Subscribe\Concerns;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
