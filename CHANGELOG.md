@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- [#21] Use support package for numberForHumans
+
+### Removed
+
+- [#22] Remove redundant docblock annotations
+
+## [0.1.1] - 2021-02-13
+
 ### Added
 
 - [#17] Add events
@@ -62,3 +72,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#15]: https://github.com/laravel-interaction/subscribe/pull/15
 [0.1.0]: https://github.com/laravel-interaction/subscribe/compare/0.0.2...0.1.0
 [0.0.2]: https://github.com/laravel-interaction/subscribe/compare/0.0.1...0.0.2
+[#22]: https://github.com/laravel-interaction/subscribe/pull/22
+[#21]: https://github.com/laravel-interaction/subscribe/pull/21
+[0.1.1]: https://github.com/laravel-interaction/subscribe/compare/0.1.0...0.1.1
