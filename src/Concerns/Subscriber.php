@@ -14,36 +14,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 trait Subscriber
 {
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     */
-    public function subscribe(Model $object): void
+    public function hasNotSubscribed(Model $object): bool
     {
-        if ($this->hasSubscribed($object)) {
-            return;
-        }
-
-        $this->subscribedItems(get_class($object))->attach($object->getKey());
-    }
-
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     */
-    public function unsubscribe(Model $object): void
-    {
-        if ($this->hasNotSubscribed($object)) {
-            return;
-        }
-
-        $this->subscribedItems(get_class($object))->detach($object->getKey());
-    }
-
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     */
-    public function toggleSubscribe(Model $object): void
-    {
-        $this->subscribedItems(get_class($object))->toggle($object->getKey());
+        return ! $this->hasSubscribed($object);
     }
 
     /**
@@ -59,9 +32,16 @@ trait Subscriber
             ->count() > 0;
     }
 
-    public function hasNotSubscribed(Model $object): bool
+    /**
+     * @param \Illuminate\Database\Eloquent\Model $object
+     */
+    public function subscribe(Model $object): void
     {
-        return ! $this->hasSubscribed($object);
+        if ($this->hasSubscribed($object)) {
+            return;
+        }
+
+        $this->subscribedItems(get_class($object))->attach($object->getKey());
     }
 
     /**
@@ -70,6 +50,26 @@ trait Subscriber
     public function subscriberSubscriptions(): HasMany
     {
         return $this->hasMany(config('subscribe.models.subscription'), config('subscribe.column_names.user_foreign_key'), $this->getKeyName());
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Model $object
+     */
+    public function toggleSubscribe(Model $object): void
+    {
+        $this->subscribedItems(get_class($object))->toggle($object->getKey());
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Model $object
+     */
+    public function unsubscribe(Model $object): void
+    {
+        if ($this->hasNotSubscribed($object)) {
+            return;
+        }
+
+        $this->subscribedItems(get_class($object))->detach($object->getKey());
     }
 
     /**

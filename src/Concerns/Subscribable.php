@@ -14,13 +14,18 @@ use function is_a;
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Subscription[] $subscribableSubscriptions
  * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Concerns\Subscriber[] $subscribers
- * @property-read int|null $subscribers_count
+ * @property-read string|int|null $subscribers_count
  *
  * @method static static|\Illuminate\Database\Eloquent\Builder whereSubscribedBy(\Illuminate\Database\Eloquent\Model $user)
  * @method static static|\Illuminate\Database\Eloquent\Builder whereNotSubscribedBy(\Illuminate\Database\Eloquent\Model $user)
  */
 trait Subscribable
 {
+    public function isNotSubscribedBy(Model $user): bool
+    {
+        return ! $this->isSubscribedBy($user);
+    }
+
     /**
      * @param \Illuminate\Database\Eloquent\Model $user
      *
@@ -40,9 +45,24 @@ trait Subscribable
             ->where(config('subscribe.column_names.user_foreign_key'), $user->getKey())->count() > 0;
     }
 
-    public function isNotSubscribedBy(Model $user): bool
+    public function scopeWhereNotSubscribedBy(Builder $query, Model $user): Builder
     {
-        return ! $this->isSubscribedBy($user);
+        return $query->whereDoesntHave(
+            'subscribers',
+            function (Builder $query) use ($user) {
+                return $query->whereKey($user->getKey());
+            }
+        );
+    }
+
+    public function scopeWhereSubscribedBy(Builder $query, Model $user): Builder
+    {
+        return $query->whereHas(
+            'subscribers',
+            function (Builder $query) use ($user) {
+                return $query->whereKey($user->getKey());
+            }
+        );
     }
 
     /**
@@ -81,25 +101,5 @@ trait Subscribable
     public function subscribersCountForHumans($precision = 1, $mode = PHP_ROUND_HALF_UP, $divisors = null): string
     {
         return Interaction::numberForHumans($this->subscribersCount(), $precision, $mode, $divisors ?? config('subscribe.divisors'));
-    }
-
-    public function scopeWhereSubscribedBy(Builder $query, Model $user): Builder
-    {
-        return $query->whereHas(
-            'subscribers',
-            function (Builder $query) use ($user) {
-                return $query->whereKey($user->getKey());
-            }
-        );
-    }
-
-    public function scopeWhereNotSubscribedBy(Builder $query, Model $user): Builder
-    {
-        return $query->whereDoesntHave(
-            'subscribers',
-            function (Builder $query) use ($user) {
-                return $query->whereKey($user->getKey());
-            }
-        );
     }
 }

@@ -23,9 +23,22 @@ use LaravelInteraction\Subscribe\Events\Unsubscribed;
  */
 class Subscription extends MorphPivot
 {
-    protected function uuids(): bool
+    protected $dispatchesEvents = [
+        'created' => Subscribed::class,
+        'deleted' => Unsubscribed::class,
+    ];
+
+    protected static function boot(): void
     {
-        return (bool) config('subscribe.uuids');
+        parent::boot();
+
+        static::creating(
+            function (self $like): void {
+                if ($like->uuids()) {
+                    $like->{$like->getKeyName()} = Str::orderedUuid();
+                }
+            }
+        );
     }
 
     public function getIncrementing(): bool
@@ -43,51 +56,9 @@ class Subscription extends MorphPivot
         return $this->uuids() ? 'string' : parent::getKeyType();
     }
 
-    protected static function boot(): void
-    {
-        parent::boot();
-
-        static::creating(
-            function (self $like): void {
-                if ($like->uuids()) {
-                    $like->{$like->getKeyName()} = Str::orderedUuid();
-                }
-            }
-        );
-    }
-
-    protected $dispatchesEvents = [
-        'created' => Subscribed::class,
-        'deleted' => Unsubscribed::class,
-    ];
-
     public function getTable()
     {
         return config('subscribe.table_names.subscriptions') ?: parent::getTable();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-     */
-    public function subscribable(): MorphTo
-    {
-        return $this->morphTo();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(config('subscribe.models.user'), config('subscribe.column_names.user_foreign_key'));
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function subscriber(): BelongsTo
-    {
-        return $this->user();
     }
 
     public function isSubscribedBy(Model $user): bool
@@ -109,5 +80,34 @@ class Subscription extends MorphPivot
     public function scopeWithType(Builder $query, string $type): Builder
     {
         return $query->where('subscribable_type', app($type)->getMorphClass());
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function subscribable(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subscriber(): BelongsTo
+    {
+        return $this->user();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(config('subscribe.models.user'), config('subscribe.column_names.user_foreign_key'));
+    }
+
+    protected function uuids(): bool
+    {
+        return (bool) config('subscribe.uuids');
     }
 }
