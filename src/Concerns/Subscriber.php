@@ -26,7 +26,9 @@ trait Subscriber
      */
     public function hasSubscribed(Model $object): bool
     {
-        return ($this->relationLoaded('subscriberSubscriptions') ? $this->subscriberSubscriptions : $this->subscriberSubscriptions())
+        return ($this->relationLoaded(
+            'subscriberSubscriptions'
+        ) ? $this->subscriberSubscriptions : $this->subscriberSubscriptions())
             ->where('subscribable_id', $object->getKey())
             ->where('subscribable_type', $object->getMorphClass())
             ->count() > 0;
@@ -41,7 +43,8 @@ trait Subscriber
             return;
         }
 
-        $this->subscribedItems(get_class($object))->attach($object->getKey());
+        $this->subscribedItems(get_class($object))
+            ->attach($object->getKey());
     }
 
     /**
@@ -49,7 +52,11 @@ trait Subscriber
      */
     public function subscriberSubscriptions(): HasMany
     {
-        return $this->hasMany(config('subscribe.models.subscription'), config('subscribe.column_names.user_foreign_key'), $this->getKeyName());
+        return $this->hasMany(
+            config('subscribe.models.subscription'),
+            config('subscribe.column_names.user_foreign_key'),
+            $this->getKeyName()
+        );
     }
 
     /**
@@ -57,7 +64,8 @@ trait Subscriber
      */
     public function toggleSubscribe(Model $object): void
     {
-        $this->subscribedItems(get_class($object))->toggle($object->getKey());
+        $this->subscribedItems(get_class($object))
+            ->toggle($object->getKey());
     }
 
     /**
@@ -69,7 +77,8 @@ trait Subscriber
             return;
         }
 
-        $this->subscribedItems(get_class($object))->detach($object->getKey());
+        $this->subscribedItems(get_class($object))
+            ->detach($object->getKey());
     }
 
     /**
@@ -79,6 +88,12 @@ trait Subscriber
      */
     protected function subscribedItems(string $class): MorphToMany
     {
-        return $this->morphedByMany($class, 'subscribable', config('subscribe.models.subscription'), config('subscribe.column_names.user_foreign_key'))->withTimestamps();
+        return $this->morphedByMany(
+            $class,
+            'subscribable',
+            config('subscribe.models.subscription'),
+            config('subscribe.column_names.user_foreign_key')
+        )
+            ->withTimestamps();
     }
 }
