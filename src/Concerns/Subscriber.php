@@ -79,6 +79,6 @@ trait Subscriber
      */
     protected function subscribedItems(string $class): MorphToMany
     {
-        return $this->morphedByMany($class, 'subscribable', config('subscribe.models.subscription'), config('subscribe.column_names.user_foreign_key'), 'subscribable_id')->withTimestamps();
+        return $this->morphedByMany($class, 'subscribable', config('subscribe.models.subscription'), config('subscribe.column_names.user_foreign_key'))->withTimestamps();
     }
 }
