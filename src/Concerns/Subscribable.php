@@ -41,8 +41,11 @@ trait Subscribable
             return $this->subscribers->contains($user);
         }
 
-        return ($this->relationLoaded('subscribableSubscriptions') ? $this->subscribableSubscriptions : $this->subscribableSubscriptions())
-            ->where(config('subscribe.column_names.user_foreign_key'), $user->getKey())->count() > 0;
+        return ($this->relationLoaded(
+            'subscribableSubscriptions'
+        ) ? $this->subscribableSubscriptions : $this->subscribableSubscriptions())
+            ->where(config('subscribe.column_names.user_foreign_key'), $user->getKey())
+            ->count() > 0;
     }
 
     public function scopeWhereNotSubscribedBy(Builder $query, Model $user): Builder
@@ -100,6 +103,11 @@ trait Subscribable
 
     public function subscribersCountForHumans($precision = 1, $mode = PHP_ROUND_HALF_UP, $divisors = null): string
     {
-        return Interaction::numberForHumans($this->subscribersCount(), $precision, $mode, $divisors ?? config('subscribe.divisors'));
+        return Interaction::numberForHumans(
+            $this->subscribersCount(),
+            $precision,
+            $mode,
+            $divisors ?? config('subscribe.divisors')
+        );
     }
 }

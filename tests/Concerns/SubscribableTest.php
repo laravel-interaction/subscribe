@@ -12,10 +12,7 @@ class SubscribableTest extends TestCase
 {
     public function modelClasses(): array
     {
-        return[
-            [Channel::class],
-            [User::class],
-        ];
+        return[[Channel::class], [User::class]];
     }
 
     /**
@@ -141,7 +138,10 @@ class SubscribableTest extends TestCase
         $other = User::query()->create();
         $model = $modelClass::query()->create();
         $user->subscribe($model);
-        self::assertSame($modelClass::query()->whereKeyNot($model->getKey())->count(), $modelClass::query()->whereNotSubscribedBy($user)->count());
+        self::assertSame(
+            $modelClass::query()->whereKeyNot($model->getKey())->count(),
+            $modelClass::query()->whereNotSubscribedBy($user)->count()
+        );
         self::assertSame($modelClass::query()->count(), $modelClass::query()->whereNotSubscribedBy($other)->count());
     }
 }
