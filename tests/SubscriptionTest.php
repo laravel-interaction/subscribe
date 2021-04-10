@@ -12,17 +12,17 @@ use LaravelInteraction\Subscribe\Tests\Models\User;
 class SubscriptionTest extends TestCase
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\LaravelInteraction\Subscribe\Tests\Models\User
+     * @var \LaravelInteraction\Subscribe\Tests\Models\User
      */
     protected $user;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\LaravelInteraction\Subscribe\Tests\Models\Channel
+     * @var \LaravelInteraction\Subscribe\Tests\Models\Channel
      */
     protected $channel;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|\LaravelInteraction\Subscribe\Subscription|null
+     * @var \LaravelInteraction\Subscribe\Subscription
      */
     protected $subscription;
 
@@ -33,7 +33,7 @@ class SubscriptionTest extends TestCase
         $this->user = User::query()->create();
         $this->channel = Channel::query()->create();
         $this->user->subscribe($this->channel);
-        $this->subscription = Subscription::query()->first();
+        $this->subscription = Subscription::query()->firstOrFail();
     }
 
     public function testSubscriptionTimestamp(): void

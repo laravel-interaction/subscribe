@@ -14,6 +14,8 @@ use LaravelInteraction\Subscribe\Events\Subscribed;
 use LaravelInteraction\Subscribe\Events\Unsubscribed;
 
 /**
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Database\Eloquent\Model $user
  * @property \Illuminate\Database\Eloquent\Model $subscriber
  * @property \Illuminate\Database\Eloquent\Model $subscribable
