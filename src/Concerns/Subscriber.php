@@ -39,8 +39,8 @@ trait Subscriber
      */
     public function subscribe(Model $object): void
     {
-        $thisHasSubscribed = $this->hasSubscribed($object);
-        if ($thisHasSubscribed) {
+        $hasSubscribed = $this->hasSubscribed($object);
+        if ($hasSubscribed) {
             return;
         }
 
@@ -74,8 +74,8 @@ trait Subscriber
      */
     public function unsubscribe(Model $object): void
     {
-        $thisHasNotSubscribed = $this->hasNotSubscribed($object);
-        if ($thisHasNotSubscribed) {
+        $hasNotSubscribed = $this->hasNotSubscribed($object);
+        if ($hasNotSubscribed) {
             return;
         }
 
