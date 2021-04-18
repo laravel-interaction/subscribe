@@ -7,6 +7,7 @@ namespace LaravelInteraction\Subscribe\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use LaravelInteraction\Subscribe\Subscription;
 
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Subscribe\Subscription[] $subscriberSubscriptions
@@ -36,16 +37,27 @@ trait Subscriber
 
     /**
      * @param \Illuminate\Database\Eloquent\Model $object
+     *
+     * @return \LaravelInteraction\Subscribe\Subscription
      */
-    public function subscribe(Model $object): void
+    public function subscribe(Model $object): Subscription
     {
-        $hasSubscribed = $this->hasSubscribed($object);
-        if ($hasSubscribed) {
-            return;
-        }
+        $attributes = [
+            'subscribable_id' => $object->getKey(),
+            'subscribable_type' => $object->getMorphClass(),
+        ];
 
-        $this->subscribedItems(get_class($object))
-            ->attach($object->getKey());
+        return $this->subscriberSubscriptions()
+            ->where($attributes)
+            ->firstOr(function () use ($attributes) {
+                $subscriberSubscriptionsLoaded = $this->relationLoaded('subscriberSubscriptions');
+                if ($subscriberSubscriptionsLoaded) {
+                    $this->unsetRelation('subscriberSubscriptions');
+                }
+
+                return $this->subscriberSubscriptions()
+                    ->create($attributes);
+            });
     }
 
     /**
@@ -62,24 +74,31 @@ trait Subscriber
 
     /**
      * @param \Illuminate\Database\Eloquent\Model $object
+     *
+     * @return bool|\LaravelInteraction\Subscribe\Subscription
      */
-    public function toggleSubscribe(Model $object): void
+    public function toggleSubscribe(Model $object)
     {
-        $this->subscribedItems(get_class($object))
-            ->toggle($object->getKey());
+        return $this->hasSubscribed($object) ? $this->unsubscribe($object) : $this->subscribe($object);
     }
 
     /**
      * @param \Illuminate\Database\Eloquent\Model $object
+     *
+     * @return bool
      */
-    public function unsubscribe(Model $object): void
+    public function unsubscribe(Model $object): bool
     {
         $hasNotSubscribed = $this->hasNotSubscribed($object);
         if ($hasNotSubscribed) {
-            return;
+            return true;
+        }
+        $subscriberSubscriptionsLoaded = $this->relationLoaded('subscriberSubscriptions');
+        if ($subscriberSubscriptionsLoaded) {
+            $this->unsetRelation('subscriberSubscriptions');
         }
 
-        $this->subscribedItems(get_class($object))
+        return (bool) $this->subscribedItems(get_class($object))
             ->detach($object->getKey());
     }
 
