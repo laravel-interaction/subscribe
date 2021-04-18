@@ -24,6 +24,10 @@ class SubscriberTest extends TestCase
                 'subscribable_id' => $channel->getKey(),
             ]
         );
+        $user->load('subscriberSubscriptions');
+        $user->unsubscribe($channel);
+        $user->load('subscriberSubscriptions');
+        $user->subscribe($channel);
     }
 
     public function testUnsubscribe(): void
