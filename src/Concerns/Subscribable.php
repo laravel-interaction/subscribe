@@ -26,11 +26,6 @@ trait Subscribable
         return ! $this->isSubscribedBy($user);
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $user
-     *
-     * @return bool
-     */
     public function isSubscribedBy(Model $user): bool
     {
         if (! is_a($user, config('subscribe.models.user'))) {
@@ -69,17 +64,11 @@ trait Subscribable
         );
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
     public function subscribableSubscriptions(): MorphMany
     {
         return $this->morphMany(config('subscribe.models.subscription'), 'subscribable');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function subscribers(): BelongsToMany
     {
         return $this->morphToMany(

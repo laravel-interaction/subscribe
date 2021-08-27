@@ -20,11 +20,6 @@ trait Subscriber
         return ! $this->hasSubscribed($object);
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     *
-     * @return bool
-     */
     public function hasSubscribed(Model $object): bool
     {
         return ($this->relationLoaded(
@@ -35,11 +30,6 @@ trait Subscriber
             ->count() > 0;
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     *
-     * @return \LaravelInteraction\Subscribe\Subscription
-     */
     public function subscribe(Model $object): Subscription
     {
         $attributes = [
@@ -60,9 +50,6 @@ trait Subscriber
             });
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function subscriberSubscriptions(): HasMany
     {
         return $this->hasMany(
@@ -73,8 +60,6 @@ trait Subscriber
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     *
      * @return bool|\LaravelInteraction\Subscribe\Subscription
      */
     public function toggleSubscribe(Model $object)
@@ -82,11 +67,6 @@ trait Subscriber
         return $this->hasSubscribed($object) ? $this->unsubscribe($object) : $this->subscribe($object);
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     *
-     * @return bool
-     */
     public function unsubscribe(Model $object): bool
     {
         $hasNotSubscribed = $this->hasNotSubscribed($object);
@@ -102,11 +82,6 @@ trait Subscriber
             ->detach($object->getKey());
     }
 
-    /**
-     * @param string $class
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
     protected function subscribedItems(string $class): MorphToMany
     {
         return $this->morphedByMany(

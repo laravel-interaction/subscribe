@@ -13,11 +13,6 @@ class Unsubscribed
      */
     public $subscription;
 
-    /**
-     * Liked constructor.
-     *
-     * @param \Illuminate\Database\Eloquent\Model $subscription
-     */
     public function __construct(Model $subscription)
     {
         $this->subscription = $subscription;
