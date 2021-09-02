@@ -31,6 +31,7 @@ trait Subscribable
         if (! is_a($user, config('subscribe.models.user'))) {
             return false;
         }
+
         $subscribersLoaded = $this->relationLoaded('subscribers');
 
         if ($subscribersLoaded) {

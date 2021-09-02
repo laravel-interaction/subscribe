@@ -73,6 +73,7 @@ trait Subscriber
         if ($hasNotSubscribed) {
             return true;
         }
+
         $subscriberSubscriptionsLoaded = $this->relationLoaded('subscriberSubscriptions');
         if ($subscriberSubscriptionsLoaded) {
             $this->unsetRelation('subscriberSubscriptions');
