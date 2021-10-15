@@ -9,5 +9,8 @@ use LaravelInteraction\Support\InteractionServiceProvider;
 
 class SubscribeServiceProvider extends InteractionServiceProvider
 {
+    /**
+     * @var string
+     */
     protected $interaction = InteractionList::SUBSCRIBE;
 }

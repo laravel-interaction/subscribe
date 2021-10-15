@@ -49,7 +49,7 @@ trait Subscribable
     {
         return $query->whereDoesntHave(
             'subscribers',
-            function (Builder $query) use ($user) {
+            function (Builder $query) use ($user): \Illuminate\Database\Eloquent\Builder {
                 return $query->whereKey($user->getKey());
             }
         );
@@ -59,7 +59,7 @@ trait Subscribable
     {
         return $query->whereHas(
             'subscribers',
-            function (Builder $query) use ($user) {
+            function (Builder $query) use ($user): \Illuminate\Database\Eloquent\Builder {
                 return $query->whereKey($user->getKey());
             }
         );
@@ -92,8 +92,11 @@ trait Subscribable
         return (int) $this->subscribers_count;
     }
 
-    public function subscribersCountForHumans($precision = 1, $mode = PHP_ROUND_HALF_UP, $divisors = null): string
-    {
+    public function subscribersCountForHumans(
+        int $precision = 1,
+        int $mode = PHP_ROUND_HALF_UP,
+        $divisors = null
+    ): string {
         return Interaction::numberForHumans(
             $this->subscribersCount(),
             $precision,

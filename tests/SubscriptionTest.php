@@ -9,22 +9,25 @@ use LaravelInteraction\Subscribe\Subscription;
 use LaravelInteraction\Subscribe\Tests\Models\Channel;
 use LaravelInteraction\Subscribe\Tests\Models\User;
 
-class SubscriptionTest extends TestCase
+/**
+ * @internal
+ */
+final class SubscriptionTest extends TestCase
 {
     /**
      * @var \LaravelInteraction\Subscribe\Tests\Models\User
      */
-    protected $user;
+    private $user;
 
     /**
      * @var \LaravelInteraction\Subscribe\Tests\Models\Channel
      */
-    protected $channel;
+    private $channel;
 
     /**
      * @var \LaravelInteraction\Subscribe\Subscription
      */
-    protected $subscription;
+    private $subscription;
 
     protected function setUp(): void
     {

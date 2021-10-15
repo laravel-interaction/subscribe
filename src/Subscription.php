@@ -25,6 +25,9 @@ use LaravelInteraction\Subscribe\Events\Unsubscribed;
  */
 class Subscription extends MorphPivot
 {
+    /**
+     * @var array<string, class-string<\LaravelInteraction\Subscribe\Events\Subscribed>>|array<string, class-string<\LaravelInteraction\Subscribe\Events\Unsubscribed>>
+     */
     protected $dispatchesEvents = [
         'created' => Subscribed::class,
         'deleted' => Unsubscribed::class,
@@ -43,6 +46,9 @@ class Subscription extends MorphPivot
         );
     }
 
+    /**
+     * @var bool
+     */
     public $incrementing = true;
 
     public function getIncrementing(): bool

@@ -10,7 +10,10 @@ use LaravelInteraction\Subscribe\Tests\Models\Channel;
 use LaravelInteraction\Subscribe\Tests\Models\User;
 use LaravelInteraction\Subscribe\Tests\TestCase;
 
-class SubscribedTest extends TestCase
+/**
+ * @internal
+ */
+final class SubscribedTest extends TestCase
 {
     public function testOnce(): void
     {

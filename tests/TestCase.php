@@ -10,7 +10,7 @@ use LaravelInteraction\Subscribe\SubscribeServiceProvider;
 use LaravelInteraction\Subscribe\Tests\Models\User;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
-class TestCase extends BaseTestCase
+abstract class TestCase extends BaseTestCase
 {
     protected function setUp(): void
     {
