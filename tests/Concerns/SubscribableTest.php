@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LaravelInteraction\Subscribe\Tests\Concerns;
 
+use Iterator;
 use LaravelInteraction\Subscribe\Tests\Models\Channel;
 use LaravelInteraction\Subscribe\Tests\Models\User;
 use LaravelInteraction\Subscribe\Tests\TestCase;
@@ -16,7 +17,7 @@ final class SubscribableTest extends TestCase
     /**
      * @return \Iterator<array<class-string<\LaravelInteraction\Subscribe\Tests\Models\Channel|\LaravelInteraction\Subscribe\Tests\Models\User>>>
      */
-    public function provideModelClasses(): \Iterator
+    public function provideModelClasses(): Iterator
     {
         yield [Channel::class];
         yield [User::class];
