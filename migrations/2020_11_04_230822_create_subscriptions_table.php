@@ -17,10 +17,14 @@ class CreateSubscriptionsTable extends Migration
             config('subscribe.table_names.subscriptions'),
             function (Blueprint $table): void {
                 config('subscribe.uuids') ? $table->uuid('uuid') : $table->bigIncrements('id');
-                $table->unsignedBigInteger(config('subscribe.column_names.user_foreign_key'))->index()->comment('user_id');
+                $table->unsignedBigInteger(config('subscribe.column_names.user_foreign_key'))
+                    ->index()
+                    ->comment('user_id');
                 $table->morphs('subscribable');
                 $table->timestamps();
-                $table->unique([config('subscribe.column_names.user_foreign_key'), 'subscribable_type', 'subscribable_id']);
+                $table->unique(
+                    [config('subscribe.column_names.user_foreign_key'), 'subscribable_type', 'subscribable_id']
+                );
             }
         );
     }
