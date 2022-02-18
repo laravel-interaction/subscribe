@@ -9,7 +9,7 @@ User subscribe/unsubscribe behaviour for Laravel.
 <a href="https://packagist.org/packages/laravel-interaction/subscribe"><img src="https://poser.pugx.org/laravel-interaction/subscribe/license" alt="License"></a>
 </p>
 
-> **Requires [PHP 7.2.0+](https://php.net/releases/)**
+> **Requires [PHP 7.3+](https://php.net/releases/)**
 
 Require Laravel Subscribe using [Composer](https://getcomposer.org):
 
