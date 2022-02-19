@@ -70,7 +70,7 @@ class Subscription extends MorphPivot
         return $this->uuids() ? 'string' : parent::getKeyType();
     }
 
-    public function getTable()
+    public function getTable(): string
     {
         return config('subscribe.table_names.subscriptions') ?: parent::getTable();
     }
