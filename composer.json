@@ -3,6 +3,11 @@
     "description": "User subscribe/unsubscribe behaviour for Laravel.",
     "keywords": ["laravel", "subscription", "subscribe"],
     "license": "MIT",
+    "homepage": "https://github.com/laravel-interaction/subscribe",
+    "support": {
+        "issues": "https://github.com/laravel-interaction/subscribe/issues",
+        "source": "https://github.com/laravel-interaction/subscribe"
+    },
     "authors": [
         {
             "name": "zingimmick",
