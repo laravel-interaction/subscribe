@@ -9,10 +9,10 @@ return [
     'uuids' => false,
     'models' => [
         'user' => \App\User::class,
-        'subscription' => Subscription::class,
+        'pivot' => Subscription::class,
     ],
     'table_names' => [
-        'subscriptions' => 'subscriptions',
+        'pivot' => 'subscriptions',
     ],
     'column_names' => [
         'user_foreign_key' => 'user_id',

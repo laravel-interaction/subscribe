@@ -72,7 +72,7 @@ class Subscription extends MorphPivot
 
     public function getTable(): string
     {
-        return config('subscribe.table_names.subscriptions') ?: parent::getTable();
+        return config('subscribe.table_names.pivot') ?: parent::getTable();
     }
 
     public function isSubscribedBy(Model $user): bool

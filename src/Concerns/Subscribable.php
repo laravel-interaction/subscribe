@@ -67,7 +67,7 @@ trait Subscribable
 
     public function subscribableSubscriptions(): MorphMany
     {
-        return $this->morphMany(config('subscribe.models.subscription'), 'subscribable');
+        return $this->morphMany(config('subscribe.models.pivot'), 'subscribable');
     }
 
     public function subscribers(): BelongsToMany
@@ -75,7 +75,7 @@ trait Subscribable
         return $this->morphToMany(
             config('subscribe.models.user'),
             'subscribable',
-            config('subscribe.models.subscription'),
+            config('subscribe.models.pivot'),
             null,
             config('subscribe.column_names.user_foreign_key')
         )->withTimestamps();

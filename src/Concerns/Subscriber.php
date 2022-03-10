@@ -52,11 +52,7 @@ trait Subscriber
 
     public function subscriberSubscriptions(): HasMany
     {
-        return $this->hasMany(
-            config('subscribe.models.subscription'),
-            config('subscribe.column_names.user_foreign_key'),
-            $this->getKeyName()
-        );
+        return $this->hasMany(config('subscribe.models.pivot'), config('subscribe.column_names.user_foreign_key'));
     }
 
     /**
@@ -88,7 +84,7 @@ trait Subscriber
         return $this->morphedByMany(
             $class,
             'subscribable',
-            config('subscribe.models.subscription'),
+            config('subscribe.models.pivot'),
             config('subscribe.column_names.user_foreign_key')
         )
             ->withTimestamps();

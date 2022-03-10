@@ -53,7 +53,7 @@ final class SubscriptionTest extends TestCase
 
     public function testGetTable(): void
     {
-        self::assertSame(config('subscribe.table_names.subscriptions'), $this->subscription->getTable());
+        self::assertSame(config('subscribe.table_names.pivot'), $this->subscription->getTable());
     }
 
     public function testSubscriber(): void
