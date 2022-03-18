@@ -9,12 +9,39 @@ User subscribe/unsubscribe behaviour for Laravel.
 <a href="https://packagist.org/packages/laravel-interaction/subscribe"><img src="https://poser.pugx.org/laravel-interaction/subscribe/license" alt="License"></a>
 </p>
 
-> **Requires [PHP 7.3+](https://php.net/releases/)**
+## Introduction
 
-Require Laravel Subscribe using [Composer](https://getcomposer.org):
+It used for users to subscribe to the model(user/topic/channel) in order to receive notifications.
+
+![](https://img.shields.io/badge/%F0%9F%94%94-1.2k-green?style=social)
+
+## Installation
+
+### Requirements
+
+- [PHP 7.3+](https://php.net/releases/)
+- [Composer](https://getcomposer.org)
+- [Laravel 8.0+](https://laravel.com/docs/releases)
+
+### Instructions
+
+Require Laravel Subscribe using [Composer](https://getcomposer.org).
 
 ```bash
 composer require laravel-interaction/subscribe
+```
+
+Publish configuration and migrations
+
+```bash
+php artisan vendor:publish --tag=subscribe-config
+php artisan vendor:publish --tag=subscribe-migrations
+```
+
+Run database migrations.
+
+```bash
+php artisan migrate
 ```
 
 ## Usage
