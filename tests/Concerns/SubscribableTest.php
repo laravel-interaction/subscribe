@@ -29,7 +29,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
-    public function testSubscriptions($modelClass): void
+    public function testSubscriptions(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -43,7 +43,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
-    public function testSubscribersCount($modelClass): void
+    public function testSubscribersCount(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -60,7 +60,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
-    public function testSubscribersCountForHumans($modelClass): void
+    public function testSubscribersCountForHumans(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -73,7 +73,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
-    public function testIsSubscribedBy($modelClass): void
+    public function testIsSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -92,7 +92,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
-    public function testIsNotSubscribedBy($modelClass): void
+    public function testIsNotSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -111,7 +111,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
-    public function testSubscribers($modelClass): void
+    public function testSubscribers(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -126,7 +126,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
-    public function testScopeWhereSubscribedBy($modelClass): void
+    public function testScopeWhereSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $other = User::query()->create();
@@ -141,7 +141,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
-    public function testScopeWhereNotSubscribedBy($modelClass): void
+    public function testScopeWhereNotSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $other = User::query()->create();
