@@ -49,7 +49,7 @@ trait Subscribable
     {
         return $query->whereDoesntHave(
             'subscribers',
-            function (Builder $query) use ($user): Builder {
+            static function (Builder $query) use ($user): Builder {
                 return $query->whereKey($user->getKey());
             }
         );
@@ -59,7 +59,7 @@ trait Subscribable
     {
         return $query->whereHas(
             'subscribers',
-            function (Builder $query) use ($user): Builder {
+            static function (Builder $query) use ($user): Builder {
                 return $query->whereKey($user->getKey());
             }
         );
