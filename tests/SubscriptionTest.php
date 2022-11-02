@@ -14,20 +14,11 @@ use LaravelInteraction\Subscribe\Tests\Models\User;
  */
 final class SubscriptionTest extends TestCase
 {
-    /**
-     * @var \LaravelInteraction\Subscribe\Tests\Models\User
-     */
-    private $user;
+    private \LaravelInteraction\Subscribe\Tests\Models\User $user;
 
-    /**
-     * @var \LaravelInteraction\Subscribe\Tests\Models\Channel
-     */
-    private $channel;
+    private \LaravelInteraction\Subscribe\Tests\Models\Channel $channel;
 
-    /**
-     * @var \LaravelInteraction\Subscribe\Subscription
-     */
-    private $subscription;
+    private \LaravelInteraction\Subscribe\Subscription $subscription;
 
     protected function setUp(): void
     {

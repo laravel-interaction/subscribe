@@ -19,7 +19,7 @@ It used for users to subscribe to the model(user/topic/channel) in order to rece
 
 ### Requirements
 
-- [PHP 7.3+](https://php.net/releases/)
+- [PHP 8.0+](https://php.net/releases/)
 - [Composer](https://getcomposer.org)
 - [Laravel 8.0+](https://laravel.com/docs/releases)
 

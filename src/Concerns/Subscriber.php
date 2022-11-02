@@ -55,10 +55,7 @@ trait Subscriber
         return $this->hasMany(config('subscribe.models.pivot'), config('subscribe.column_names.user_foreign_key'));
     }
 
-    /**
-     * @return bool|\LaravelInteraction\Subscribe\Subscription
-     */
-    public function toggleSubscribe(Model $object)
+    public function toggleSubscribe(Model $object): bool|Subscription
     {
         return $this->hasSubscribed($object) ? $this->unsubscribe($object) : $this->subscribe($object);
     }
@@ -75,7 +72,7 @@ trait Subscriber
             $this->unsetRelation('subscriberSubscriptions');
         }
 
-        return (bool) $this->subscribedItems(\get_class($object))
+        return (bool) $this->subscribedItems($object::class)
             ->detach($object->getKey());
     }
 

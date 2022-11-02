@@ -8,13 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscribed
 {
-    /**
-     * @var \Illuminate\Database\Eloquent\Model
-     */
-    public $subscription;
-
-    public function __construct(Model $subscription)
+    public function __construct(public Model $model)
     {
-        $this->subscription = $subscription;
     }
 }
