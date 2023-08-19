@@ -32,45 +32,45 @@ final class SubscriptionTest extends TestCase
 
     public function testSubscriptionTimestamp(): void
     {
-        self::assertInstanceOf(Carbon::class, $this->subscription->created_at);
-        self::assertInstanceOf(Carbon::class, $this->subscription->updated_at);
+        $this->assertInstanceOf(Carbon::class, $this->subscription->created_at);
+        $this->assertInstanceOf(Carbon::class, $this->subscription->updated_at);
     }
 
     public function testScopeWithType(): void
     {
-        self::assertSame(1, Subscription::query()->withType(Channel::class)->count());
-        self::assertSame(0, Subscription::query()->withType(User::class)->count());
+        $this->assertSame(1, Subscription::query()->withType(Channel::class)->count());
+        $this->assertSame(0, Subscription::query()->withType(User::class)->count());
     }
 
     public function testGetTable(): void
     {
-        self::assertSame(config('subscribe.table_names.pivot'), $this->subscription->getTable());
+        $this->assertSame(config('subscribe.table_names.pivot'), $this->subscription->getTable());
     }
 
     public function testSubscriber(): void
     {
-        self::assertInstanceOf(User::class, $this->subscription->subscriber);
+        $this->assertInstanceOf(User::class, $this->subscription->subscriber);
     }
 
     public function testSubscribable(): void
     {
-        self::assertInstanceOf(Channel::class, $this->subscription->subscribable);
+        $this->assertInstanceOf(Channel::class, $this->subscription->subscribable);
     }
 
     public function testUser(): void
     {
-        self::assertInstanceOf(User::class, $this->subscription->user);
+        $this->assertInstanceOf(User::class, $this->subscription->user);
     }
 
     public function testIsSubscribedTo(): void
     {
-        self::assertTrue($this->subscription->isSubscribedTo($this->channel));
-        self::assertFalse($this->subscription->isSubscribedTo($this->user));
+        $this->assertTrue($this->subscription->isSubscribedTo($this->channel));
+        $this->assertFalse($this->subscription->isSubscribedTo($this->user));
     }
 
     public function testIsSubscribedBy(): void
     {
-        self::assertFalse($this->subscription->isSubscribedBy($this->channel));
-        self::assertTrue($this->subscription->isSubscribedBy($this->user));
+        $this->assertFalse($this->subscription->isSubscribedBy($this->channel));
+        $this->assertTrue($this->subscription->isSubscribedBy($this->user));
     }
 }

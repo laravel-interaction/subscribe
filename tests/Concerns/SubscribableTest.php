@@ -33,8 +33,8 @@ final class SubscribableTest extends TestCase
         $user = User::query()->create();
         $model = $modelClass::query()->create();
         $user->subscribe($model);
-        self::assertSame(1, $model->subscribableSubscriptions()->count());
-        self::assertSame(1, $model->subscribableSubscriptions->count());
+        $this->assertSame(1, $model->subscribableSubscriptions()->count());
+        $this->assertSame(1, $model->subscribableSubscriptions->count());
     }
 
     /**
@@ -47,11 +47,11 @@ final class SubscribableTest extends TestCase
         $user = User::query()->create();
         $model = $modelClass::query()->create();
         $user->subscribe($model);
-        self::assertSame(1, $model->subscribersCount());
+        $this->assertSame(1, $model->subscribersCount());
         $user->unsubscribe($model);
-        self::assertSame(1, $model->subscribersCount());
+        $this->assertSame(1, $model->subscribersCount());
         $model->loadCount('subscribers');
-        self::assertSame(0, $model->subscribersCount());
+        $this->assertSame(0, $model->subscribersCount());
     }
 
     /**
@@ -64,7 +64,7 @@ final class SubscribableTest extends TestCase
         $user = User::query()->create();
         $model = $modelClass::query()->create();
         $user->subscribe($model);
-        self::assertSame('1', $model->subscribersCountForHumans());
+        $this->assertSame('1', $model->subscribersCountForHumans());
     }
 
     /**
@@ -76,14 +76,14 @@ final class SubscribableTest extends TestCase
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
-        self::assertFalse($model->isSubscribedBy($model));
+        $this->assertFalse($model->isSubscribedBy($model));
         $user->subscribe($model);
-        self::assertTrue($model->isSubscribedBy($user));
+        $this->assertTrue($model->isSubscribedBy($user));
         $model->load('subscribers');
         $user->unsubscribe($model);
-        self::assertTrue($model->isSubscribedBy($user));
+        $this->assertTrue($model->isSubscribedBy($user));
         $model->load('subscribers');
-        self::assertFalse($model->isSubscribedBy($user));
+        $this->assertFalse($model->isSubscribedBy($user));
     }
 
     /**
@@ -95,14 +95,14 @@ final class SubscribableTest extends TestCase
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
-        self::assertTrue($model->isNotSubscribedBy($model));
+        $this->assertTrue($model->isNotSubscribedBy($model));
         $user->subscribe($model);
-        self::assertFalse($model->isNotSubscribedBy($user));
+        $this->assertFalse($model->isNotSubscribedBy($user));
         $model->load('subscribers');
         $user->unsubscribe($model);
-        self::assertFalse($model->isNotSubscribedBy($user));
+        $this->assertFalse($model->isNotSubscribedBy($user));
         $model->load('subscribers');
-        self::assertTrue($model->isNotSubscribedBy($user));
+        $this->assertTrue($model->isNotSubscribedBy($user));
     }
 
     /**
@@ -115,9 +115,9 @@ final class SubscribableTest extends TestCase
         $user = User::query()->create();
         $model = $modelClass::query()->create();
         $user->subscribe($model);
-        self::assertSame(1, $model->subscribers()->count());
+        $this->assertSame(1, $model->subscribers()->count());
         $user->unsubscribe($model);
-        self::assertSame(0, $model->subscribers()->count());
+        $this->assertSame(0, $model->subscribers()->count());
     }
 
     /**
@@ -131,8 +131,8 @@ final class SubscribableTest extends TestCase
         $other = User::query()->create();
         $model = $modelClass::query()->create();
         $user->subscribe($model);
-        self::assertSame(1, $modelClass::query()->whereSubscribedBy($user)->count());
-        self::assertSame(0, $modelClass::query()->whereSubscribedBy($other)->count());
+        $this->assertSame(1, $modelClass::query()->whereSubscribedBy($user)->count());
+        $this->assertSame(0, $modelClass::query()->whereSubscribedBy($other)->count());
     }
 
     /**
@@ -146,10 +146,10 @@ final class SubscribableTest extends TestCase
         $other = User::query()->create();
         $model = $modelClass::query()->create();
         $user->subscribe($model);
-        self::assertSame(
+        $this->assertSame(
             $modelClass::query()->whereKeyNot($model->getKey())->count(),
             $modelClass::query()->whereNotSubscribedBy($user)->count()
         );
-        self::assertSame($modelClass::query()->count(), $modelClass::query()->whereNotSubscribedBy($other)->count());
+        $this->assertSame($modelClass::query()->count(), $modelClass::query()->whereNotSubscribedBy($other)->count());
     }
 }
