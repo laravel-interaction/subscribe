@@ -87,7 +87,7 @@ final class SubscriberTest extends TestCase
         $channel = Channel::query()->create();
         $user->toggleSubscribe($channel);
         $this->assertSame(1, $user->subscriberSubscriptions()->count());
-        $this->assertSame(1, $user->subscriberSubscriptions->count());
+        $this->assertCount(1, $user->subscriberSubscriptions);
     }
 
     public function testHasSubscribed(): void

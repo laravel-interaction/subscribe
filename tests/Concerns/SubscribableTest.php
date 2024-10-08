@@ -34,7 +34,7 @@ final class SubscribableTest extends TestCase
         $model = $modelClass::query()->create();
         $user->subscribe($model);
         $this->assertSame(1, $model->subscribableSubscriptions()->count());
-        $this->assertSame(1, $model->subscribableSubscriptions->count());
+        $this->assertCount(1, $model->subscribableSubscriptions);
     }
 
     /**
