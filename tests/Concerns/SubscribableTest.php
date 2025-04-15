@@ -7,6 +7,7 @@ namespace LaravelInteraction\Subscribe\Tests\Concerns;
 use LaravelInteraction\Subscribe\Tests\Models\Channel;
 use LaravelInteraction\Subscribe\Tests\Models\User;
 use LaravelInteraction\Subscribe\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @internal
@@ -14,20 +15,11 @@ use LaravelInteraction\Subscribe\Tests\TestCase;
 final class SubscribableTest extends TestCase
 {
     /**
-     * @return \Iterator<array<class-string<\LaravelInteraction\Subscribe\Tests\Models\Channel|\LaravelInteraction\Subscribe\Tests\Models\User>>>
-     */
-    public static function provideModelClasses(): \Iterator
-    {
-        yield [Channel::class];
-
-        yield [User::class];
-    }
-
-    /**
      * @dataProvider provideModelClasses
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testSubscriptions(string $modelClass): void
     {
         $user = User::query()->create();
@@ -42,6 +34,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testSubscribersCount(string $modelClass): void
     {
         $user = User::query()->create();
@@ -59,6 +52,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testSubscribersCountForHumans(string $modelClass): void
     {
         $user = User::query()->create();
@@ -72,6 +66,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testIsSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
@@ -91,6 +86,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testIsNotSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
@@ -110,6 +106,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testSubscribers(string $modelClass): void
     {
         $user = User::query()->create();
@@ -125,6 +122,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testScopeWhereSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
@@ -140,6 +138,7 @@ final class SubscribableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Subscribe\Tests\Models\User|\LaravelInteraction\Subscribe\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testScopeWhereNotSubscribedBy(string $modelClass): void
     {
         $user = User::query()->create();
@@ -151,5 +150,15 @@ final class SubscribableTest extends TestCase
             $modelClass::query()->whereNotSubscribedBy($user)->count()
         );
         $this->assertSame($modelClass::query()->count(), $modelClass::query()->whereNotSubscribedBy($other)->count());
+    }
+
+    /**
+     * @return \Iterator<array<class-string<\LaravelInteraction\Subscribe\Tests\Models\Channel|\LaravelInteraction\Subscribe\Tests\Models\User>>>
+     */
+    public static function provideModelClasses(): \Iterator
+    {
+        yield [Channel::class];
+
+        yield [User::class];
     }
 }
