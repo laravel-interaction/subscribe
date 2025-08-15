@@ -88,9 +88,9 @@ trait Subscribable
     }
 
     /**
-     * @phpstan-param 1|2|3|4 $mode
-     *
      * @param array<int, string>|null $divisors
+     *
+     * @phpstan-param 1|2|3|4 $mode
      */
     public function subscribersCountForHumans(
         int $precision = 1,
